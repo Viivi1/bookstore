@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-
 
 @Controller
 public class BookController {
@@ -27,6 +25,7 @@ public class BookController {
     public String showIndex(){
         return "index"; //index.html
     }
+    // KIRJAN LISÄYS
     @GetMapping("/add")
     public String showAddBook(Model model){
         model.addAttribute("book", new Book());
@@ -37,12 +36,28 @@ public class BookController {
         bookRepository.save(book);
         return "redirect:/booklist";
     }
+
+    // KIRJAN POISTO 
     @GetMapping("/delete/{id}")
     public String deleteBook(@PathVariable("id") Long bookId, Model model){
         bookRepository.deleteById(bookId);
         return "redirect:/booklist";
     }
 
+    // KIRJAN MUOKKAUS
+    @GetMapping("/edit/{id}")
+    public String showEditBook(@PathVariable("id") Long id, Model model){
+        Book book = bookRepository.findById(id).orElse(null);
+        model.addAttribute("book", book);
+        return "editbook"; //editbook.html
+    }
+    @PostMapping("/update")
+    public String updateBook(@ModelAttribute Book book){
+        bookRepository.save(book);
+        return "redirect:/booklist";
+    }
+
+    // KIRJAT LISTATTUNA
     @GetMapping("/booklist")
     public String showBookList(Model model) {
         List<Book> books = (List<Book>) bookRepository.findAll();
