@@ -25,8 +25,7 @@ public CommandLineRunner demo(BookRepository repository) {
 	  	log.info("save a couple of books");
 		repository.save(new Book("The Hobbit", "J.R.R. Tolkien", 1937, "123456789", 19.99));
 		repository.save(new Book("1984", "George Orwell", 1949, "987654321", 14.99));
-		
+		repository.save(new Book("Kafka on the Shore", "Haruki Murakami", 2002, "112345111", 21.99));
 	};
-}
-
+	}
 }
