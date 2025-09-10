@@ -73,11 +73,20 @@ public class Book {
     public void setPrice(double price) {
         this.price = price;
     }
+    
 
     @Override
     public String toString() {
         return "Book [id=" + id + ", title=" + title + ", author=" + author + ", publicationYear=" + publicationYear
                 + ", isbn=" + isbn + ", price=" + price + "]";
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
 }
