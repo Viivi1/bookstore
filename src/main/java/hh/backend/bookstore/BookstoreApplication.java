@@ -22,22 +22,18 @@ public class BookstoreApplication {
 		SpringApplication.run(BookstoreApplication.class, args);
 	}
 	@Bean
-	public CommandLineRunner demo(BookRepository repository) {
+	public CommandLineRunner demo(BookRepository repository, CategoryRepository categoryRepository) {
 	return (args) -> {
+		log.info("save some categories");
+		Category fantasy = categoryRepository.save(new Category(null, "Fantasy"));
+		Category scifi = categoryRepository.save(new Category(null, "Scifi"));
+		Category history = categoryRepository.save(new Category(null, "History"));	
+
 	  	log.info("save a couple of books");
-		repository.save(new Book("The Hobbit", "J.R.R. Tolkien", 1937, "123456789", 19.99));
-		repository.save(new Book("1984", "George Orwell", 1949, "987654321", 14.99));
-		repository.save(new Book("Kafka on the Shore", "Haruki Murakami", 2002, "112345111", 21.99));
+		repository.save(new Book("The Hobbit", "J.R.R. Tolkien", 1937, "123456789", 19.99, fantasy));
+		repository.save(new Book("1984", "George Orwell", 1949, "987654321", 14.99, scifi));
+		repository.save(new Book("Kafka on the Shore", "Haruki Murakami", 2002, "112345111", 21.99, fantasy));
 		
 	};
 }
-	@Bean
-	public CommandLineRunner categoryDemo(CategoryRepository categoryRepository) {
-	return (args) -> {
-		log.info("save some categories");
-		categoryRepository.save(new Category(null, "Fantasy"));
-		categoryRepository.save(new Category(null, "Scifi"));
-		categoryRepository.save(new Category(null, "History"));		
-	};
-	}
 }
