@@ -2,9 +2,11 @@ package hh.backend.bookstore.web;
 
 import hh.backend.bookstore.domain.Book;
 import hh.backend.bookstore.domain.BookRepository;
+import hh.backend.bookstore.domain.CategoryRepository;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +22,8 @@ public class BookController {
     BookController(BookRepository bookRepository) {
         this.bookRepository = bookRepository;
     }
+    @Autowired
+    private CategoryRepository catRepository;
 
     @GetMapping("/index")
     public String showIndex(){
@@ -29,6 +33,7 @@ public class BookController {
     @GetMapping("/add")
     public String showAddBook(Model model){
         model.addAttribute("book", new Book());
+        model.addAttribute("categories", catRepository.findAll());
         return "addbook"; //addbook.html
     }
     @PostMapping("/addbook")
