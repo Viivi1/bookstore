@@ -20,7 +20,7 @@
         <th>ISBN</th>
         <th>Price</th>
         <th></th>
-        <td sec:authorize="hasRole('ADMIN')"></td>
+        <td sec:authorize="hasAuthority('ADMIN')"></td>
     </tr>
     <tr th:each="book : ${books}">
         <td th:text="${book.title}">Title </td>
@@ -32,7 +32,7 @@
         <td>
         <a th:href="@{/edit/{id}(id=${book.id})}" class="btn btn-primary">Edit</a>
         </td>
-        <td sec:authorize="hasRole('ADMIN')">
+        <td sec:authorize="hasAuthority('ADMIN')">
         <a th:href="@{/delete/{id}(id=${book.id})}" class="btn btn-danger">Delete</a>
         </td>
 

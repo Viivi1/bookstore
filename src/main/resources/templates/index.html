@@ -8,5 +8,11 @@
 <body>
     <h1>Bookstore</h1>
     <p>Etusivu</p>
+    <a href="/booklist">Book list</a>
+    <a href="/categorylist">Category list</a>
+    <p></p>
+        <!-- LOGOUT -->
+    <form th:action="@{/logout}" method="post">
+	<input type="submit" value="Sign Out"/>
 </body>
 </html>

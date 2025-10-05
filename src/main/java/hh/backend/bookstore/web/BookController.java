@@ -51,7 +51,7 @@ public class BookController {
     }
 
     // KIRJAN POISTO 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/delete/{id}")
     public String deleteBook(@PathVariable("id") Long bookId, Model model){
         bookRepository.deleteById(bookId);
